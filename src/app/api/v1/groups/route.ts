@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 
     const shuffledNames = shuffle(names);
 
-    let matchesPromises = [];
+    const matchesPromises = [];
 
     for (
       let currentIndex = 0;

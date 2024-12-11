@@ -32,6 +32,7 @@ export default function Buttons({
       }
     } catch (error) {
       // TODO:
+      console.error(error);
     }
   };
 

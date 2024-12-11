@@ -14,8 +14,8 @@ export default function Home() {
 
   const [name, setName] = useState<string>("");
   const [names, setNames] = useState<string[]>([
-    "Victor",
-    "Nathália",
+    //"Victor",
+    //"Nathália",
     //"Daniel",
   ]);
   const [loadingCreatingGroup, setLoadingCreatingGroup] =
@@ -38,8 +38,6 @@ export default function Home() {
 
       const data: { group_id: string } = await res.json();
 
-      console.log(data);
-
       router.push(`/grupo/${data.group_id}`);
     } catch (error) {
       console.error(error);
@@ -60,11 +58,11 @@ export default function Home() {
   };
 
   const handleRemoveName = (index: number) => {
-    setNames(names.filter((name, currentIndex) => currentIndex !== index));
+    setNames(names.filter((_, currentIndex) => currentIndex !== index));
   };
 
-  const handleKeyDown = (e: any) => {
-    if (e.keyCode === 13 || e.keyCode === 32) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === 13) {
       handleAddName();
     }
   };
