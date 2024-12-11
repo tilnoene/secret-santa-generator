@@ -24,9 +24,9 @@ export default async function Invitation({
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center">
-      <p className="text-lg mb-0">{match.receiver},</p>
+      <p className="text-lg mb-0">{match.giver},</p>
       <p>seu amigo secreto é:</p>
-      <h1 className="text-4xl mt-2 text-blue-500">{match.giver}</h1>
+      <h1 className="text-4xl mt-2 text-blue-500">{match.receiver}</h1>
     </div>
   );
 }
