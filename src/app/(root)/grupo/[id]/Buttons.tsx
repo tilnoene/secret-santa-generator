@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { FiShare2 } from "react-icons/fi";
-import { FiCopy } from "react-icons/fi";
+import { FiShare2 } from 'react-icons/fi';
+import { FiCopy } from 'react-icons/fi';
 
 export default function Buttons({
   matchId,
@@ -16,8 +16,8 @@ export default function Buttons({
 
   const getShareData = (matchId: string) => {
     return {
-      title: "Amigo Secreto",
-      text: "Descubra quem será seu amigo secreto esse ano!",
+      title: 'Amigo Secreto',
+      text: 'Descubra quem será seu amigo secreto esse ano!',
       url: getCustomMessage(matchId), // TODO: not working
     };
   };
@@ -26,7 +26,7 @@ export default function Buttons({
     try {
       if (navigator.share) {
         await navigator.share(getShareData(matchId));
-        console.log("Link shared successfully!");
+        console.log('Link shared successfully!');
       } else {
         // TODO:
       }
@@ -40,10 +40,10 @@ export default function Buttons({
     navigator.clipboard
       .writeText(getCustomMessage(matchId))
       .then(() => {
-        console.log("Link copiado para a área de trabalho"); // TODO:
+        console.log('Link copiado para a área de trabalho'); // TODO:
       })
       .catch((err) => {
-        console.error("Failed to copy: ", err);
+        console.error('Failed to copy: ', err);
         // TODO: error
       });
   };

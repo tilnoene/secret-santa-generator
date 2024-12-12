@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "Gerador de Amigo Secreto",
-  description: "O melhor gerador de amigo secreto online!",
+  title: 'Gerador de Amigo Secreto',
+  description: 'O melhor gerador de amigo secreto online!',
 };
 
 export default function RootLayout({

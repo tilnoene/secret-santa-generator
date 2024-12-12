@@ -3,7 +3,6 @@ import { redirect } from 'next/navigation';
 
 import { getGroup } from '@/app/utils/getGroup';
 import { getMatch } from '@/app/utils/getMatch';
-import { getBaseUrl } from '@/app/utils/getBaseUrl';
 
 type Props = {
   params: Promise<{ id: string }>;
