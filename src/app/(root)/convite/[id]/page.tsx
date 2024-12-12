@@ -1,32 +1,25 @@
-import type { Metadata, ResolvingMetadata } from "next";
-import { headers } from "next/headers";
+import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
+
+import { getGroup } from '@/app/utils/getGroup';
+import { getMatch } from '@/app/utils/getMatch';
+import { getBaseUrl } from '@/app/utils/getBaseUrl';
 
 type Props = {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-async function getMatch(id: string): Promise<Match> {
-  const host = (await headers()).get("host");
-  const protocol = process?.env.NODE_ENV === "development" ? "http" : "https";
-
-  const res = await fetch(`${protocol}://${host}/api/v1/matches/${id}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-
-  const match: Match = (await res.json()).match;
-
-  return match;
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const matchId = (await params).id;
   const match = await getMatch(matchId);
+  const group = match ? await getGroup(match.groupId) : null;
 
   return {
-    title: "Grupo da Família",
-    description: `${match.giver}, descubra quem você tirou no amigo secreto!`,
+    title: group ? group.name : 'Erro',
+    description: match
+      ? `${match.giver}, descubra quem você tirou no amigo secreto!`
+      : 'Erro ao carregar o grupo',
   };
 }
 
@@ -37,6 +30,10 @@ export default async function Invitation({
 }) {
   const matchId = (await params).id;
   const match = await getMatch(matchId);
+
+  if (!match) {
+    redirect('/'); // TODO:
+  }
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center">

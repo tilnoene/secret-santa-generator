@@ -1,22 +1,25 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from 'firebase/firestore';
 
-import { db } from "@/firebase";
+import { db } from '@/firebase';
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const matchId = (await params).id;
-    const match = await getDoc(doc(db, "matches", matchId));
+    const match = await getDoc(doc(db, 'matches', matchId));
 
     if (match.exists()) {
-      return Response.json({ match: match.data() });
+      return Response.json({
+        giver: match.data().giver,
+        receiver: match.data().receiver,
+      });
     } else {
-      return Response.json({ error: "Match not found" }, { status: 404 });
+      return Response.json({ error: 'Match not found' }, { status: 404 });
     }
   } catch (error) {
-    console.error("Error processing request:", error);
-    return Response.json({ error: "Internal Server Error" }, { status: 500 });
+    console.error('Error processing request:', error);
+    return Response.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

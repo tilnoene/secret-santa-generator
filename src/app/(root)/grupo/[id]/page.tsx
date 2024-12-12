@@ -1,31 +1,16 @@
-import type { Metadata } from "next";
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 
-import Buttons from "./Buttons";
+import Buttons from './Buttons';
+
+import { getGroup } from '@/app/utils/getGroup';
 
 async function getBaseUrl() {
-  const host = (await headers()).get("host");
-  const protocol = process?.env.NODE_ENV === "development" ? "http" : "https";
+  const host = (await headers()).get('host');
+  const protocol = process?.env.NODE_ENV === 'development' ? 'http' : 'https';
   const baseUrl = `${protocol}://${host}`;
   return baseUrl;
-}
-
-async function getGroup(id: string): Promise<Group | null> {
-  const baseUrl = await getBaseUrl();
-
-  const res = await fetch(`${baseUrl}/api/v1/groups/${id}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-
-  if (res.status !== 200) {
-    return null;
-  }
-
-  const group: Group = (await res.json()).group;
-
-  return group;
 }
 
 type Props = {
@@ -38,10 +23,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const group = await getGroup(groupId);
 
   return {
-    title: group ? group.name : "Erro",
+    title: group ? group.name : 'Erro',
     description: group
       ? `Gerencie o grupo de amigo secreto "${group.name}"`
-      : "Ocorreu um erro ao carregar o grupo.",
+      : 'Ocorreu um erro ao carregar o grupo.',
   };
 }
 
@@ -54,7 +39,7 @@ export default async function Group({
   const group = await getGroup(groupId);
 
   if (!group) {
-    redirect("/"); // TODO:
+    redirect('/'); // TODO:
   }
 
   const baseUrl = await getBaseUrl();
