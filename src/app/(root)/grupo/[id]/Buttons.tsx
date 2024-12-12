@@ -11,14 +11,13 @@ export default function Buttons({
   baseUrl: string;
 }) {
   const getCustomMessage = (matchId: string) => {
-    return `Descubra quem será seu amigo secreto esse ano aqui: ${baseUrl}/convite/${matchId}`;
+    return `${baseUrl}/convite/${matchId}`;
   };
 
   const getShareData = (matchId: string) => {
     return {
-      title: 'Amigo Secreto',
-      text: 'Descubra quem será seu amigo secreto esse ano!',
-      url: getCustomMessage(matchId), // TODO: not working
+      title: 'Descubra quem você tirou no amigo secreto!',
+      url: getCustomMessage(matchId),
     };
   };
 

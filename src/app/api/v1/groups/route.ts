@@ -18,6 +18,15 @@ type CreateGroupDto = {
 };
 
 export async function POST(request: Request) {
+  // const matchId = '0FSxWSRKDXnyqZxAgNds';
+
+  // const docRef = doc(db, 'matches', matchId);
+  // await updateDoc(docRef, { group_id: 'aqui!' })
+  //   .then(() => console.log('foi'))
+  //   .catch((err) => console.log(err));
+
+  // return Response.json({ statd: 'ok' });
+
   try {
     const body: CreateGroupDto = await request.json();
     const { name, memberNames } = body;

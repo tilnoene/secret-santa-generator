@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const group = match ? await getGroup(match.groupId) : null;
 
   return {
-    title: group ? group.name : 'Erro',
+    title: match && group ? `${match.giver} | ${group.name}` : 'Erro',
     description: match
       ? `${match.giver}, descubra quem você tirou no amigo secreto!`
       : 'Erro ao carregar o grupo',

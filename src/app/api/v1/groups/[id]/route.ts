@@ -22,6 +22,7 @@ export async function GET(
           id: match.id,
           giver: match.data().giver,
           receiver: match.data().receiver,
+          groupId: match.data().group_id,
         };
       });
 

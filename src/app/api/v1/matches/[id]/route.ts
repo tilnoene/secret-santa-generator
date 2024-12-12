@@ -14,6 +14,7 @@ export async function GET(
       return Response.json({
         giver: match.data().giver,
         receiver: match.data().receiver,
+        groupId: match.data().group_id,
       });
     } else {
       return Response.json({ error: 'Match not found' }, { status: 404 });
