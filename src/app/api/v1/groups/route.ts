@@ -3,14 +3,14 @@ import { addDoc, updateDoc, collection, doc } from 'firebase/firestore';
 
 import { db } from '@/firebase';
 
-const shuffle = (array: string[]) => {
+function shuffle<T>(array: T[]): T[] {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
 
   return array;
-};
+}
 
 type CreateGroupDto = {
   name: string;
@@ -18,15 +18,6 @@ type CreateGroupDto = {
 };
 
 export async function POST(request: Request) {
-  // const matchId = '0FSxWSRKDXnyqZxAgNds';
-
-  // const docRef = doc(db, 'matches', matchId);
-  // await updateDoc(docRef, { group_id: 'aqui!' })
-  //   .then(() => console.log('foi'))
-  //   .catch((err) => console.log(err));
-
-  // return Response.json({ statd: 'ok' });
-
   try {
     const body: CreateGroupDto = await request.json();
     const { name, memberNames } = body;
@@ -68,7 +59,7 @@ export async function POST(request: Request) {
     }
 
     const matches = await Promise.all(matchesPromises);
-    const matchesId = matches.map((match) => match.id);
+    const matchesId = shuffle(matches.map((match) => match.id));
 
     const group = await addDoc(collection(db, 'groups'), {
       name: name,
